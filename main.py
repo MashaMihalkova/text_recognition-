@@ -85,7 +85,10 @@ pytesseract.pytesseract.tesseract_cmd = PATH_TO_PYTESSERACT
 
 target_word = "продолжительность"
 target_word_end = "бригадир"
-for _,_, files in os.walk(PATH_TO_FOLDER):
+COLOR_GREY = 'color'
+FILTER = 'THRESH_BINARY+THRESH_OTSU'
+# THRESH_OTSU, THRESH_BINARY+THRESH_OTSU, equalizeHist, createCLAHE
+for _, _, files in os.walk(PATH_TO_FOLDER):
     for file in files:
         if file[-4:] == '.png' or file[-4:] == '.jpg' or file[-5:] == '.jpeg':
         # if file["extension"] == '.png' or file[-4:] == '.jpg' or file[-5:] == '.jpeg':
@@ -120,7 +123,7 @@ for _,_, files in os.walk(PATH_TO_FOLDER):
                     plt.imsave(PATH_TO_FOLDER + f"small_{file}", image_copy)
 
                     process_image_tesseract(PATH_TO_FOLDER + f"small_{file}")
-                    recogn_table(PATH_TO_FOLDER + f"small_{file}")
+                    recogn_table(PATH_TO_FOLDER + f"small_{file}", color_grey=COLOR_GREY, filter=FILTER)
                     break
 
                 else:
@@ -134,7 +137,7 @@ for _,_, files in os.walk(PATH_TO_FOLDER):
                         plt.imsave(PATH_TO_FOLDER + f"small_{file}", image_copy)
 
                         process_image_tesseract(PATH_TO_FOLDER + f"small_{file}")
-                        recogn_table(PATH_TO_FOLDER + f"small_{file}")
+                        recogn_table(PATH_TO_FOLDER + f"small_{file}", color_grey=COLOR_GREY, filter=FILTER)
 
                         break
                     break
